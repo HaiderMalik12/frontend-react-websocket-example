@@ -33,6 +33,8 @@ function App() {
       ) : (
         <div>
           <p>Welcome {user.name} (ID: {user.id})</p>
+          <NotificationListener />
+          <ToastContainer position="top-right" autoClose={5000}  /> 
           <VideoCall user={user} />
         </div>
       )}
