@@ -3,6 +3,7 @@ import socket from './socket';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import NotificationListener from './components/NotificationListener';
+import VideoCall from './components/VideoCall';
 
 function App() {
   // Simulate logged-in user
@@ -10,7 +11,7 @@ function App() {
 
   // Simulated login
   const handleLogin = () => {
-    const fakeUser = { id: '929c1838-dbab-4344-9446-1bf391a60d90', name: 'Haider' };
+    const fakeUser = { id: prompt('Enter the user ID'), name: 'Name User' };
     setUser(fakeUser);
   };
 
@@ -18,7 +19,7 @@ function App() {
     if (user) {
       // Connect to socket after login
       socket.connect();
-      socket.emit('register', user.id);
+      socket.emit('register', { userId: user.id});
 
       console.log('User connected to socket:', user.id);
 
@@ -40,6 +41,7 @@ function App() {
 
       <NotificationListener/>
       <ToastContainer position="top-right" autoClose={4000} />
+      <VideoCall user={user} />
     </div>
   );
 }
